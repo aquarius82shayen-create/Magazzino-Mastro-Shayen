@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#11100e">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="assets/icon-512.png">
+<title>Mastro Shayen · Birra Magazzino</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app-shell">
+  <header class="topbar">
+    <img src="assets/header.png" class="header-art" alt="Mastro Shayen - Magazzino">
+    <button id="settingsBtn" class="gear-btn" aria-label="Impostazioni">⚙</button>
+  </header>
+
+  <main id="app">
+    <section id="dashboard" class="view active">
+      <div class="page-head">
+        <div>
+          <p class="eyebrow">DASHBOARD</p>
+          <h1>Le tue scorte</h1>
+          <p class="muted">Tutto il magazzino in un colpo d'occhio.</p>
+        </div>
+        <button class="primary" id="addProduct">＋ Aggiungi</button>
+      </div>
+
+      <div class="dashboard-summary">
+        <div class="summary-card"><span>Materiali</span><strong id="statMaterials">0</strong></div>
+        <div class="summary-card"><span>Lotti</span><strong id="statLots">0</strong></div>
+        <div class="summary-card"><span>⚠ Scadenze</span><strong id="statExpired">0</strong></div>
+      </div>
+
+      <div class="filters">
+        <div class="search-wrap">⌕<input id="inventorySearch" placeholder="Cerca materiale…" autocomplete="off"></div>
+        <select id="categoryFilter"><option value="">Tutti i reparti</option><option>Malti</option><option>Luppoli</option><option>Lieviti</option><option>Additivi</option></select>
+      </div>
+
+      <div id="inventoryList"></div>
+    </section>
+
+    <section id="recipes" class="view">
+      <div class="page-head">
+        <div><p class="eyebrow">RICETTE</p><h1>Le tue ricette</h1></div>
+        <button class="primary" id="newRecipe">＋ Nuova ricetta</button>
+      </div>
+      <div id="recipeList" class="recipe-grid"></div>
+    </section>
+
+    <section id="settings" class="view">
+      <div class="settings-head">
+        <div><p class="eyebrow">IMPOSTAZIONI</p><h1>Dati dell'app</h1></div>
+        <button class="secondary" id="closeSettings">Chiudi</button>
+      </div>
+      <div class="settings-card">
+        <h2>Backup</h2>
+        <p class="muted">Salva o ripristina magazzino e ricette.</p>
+        <div class="button-row">
+          <button class="secondary" id="backupBtn">💾 Salva backup</button>
+          <label class="secondary file-btn">📂 Carica backup<input type="file" id="restoreFile" accept=".json"></label>
+        </div>
+      </div>
+      <div class="settings-card danger-card">
+        <h2>Reset reparto</h2>
+        <p class="muted">Elimina tutti i lotti del reparto selezionato.</p>
+        <div class="button-row">
+          <button class="danger" data-reset="Malti">Malti</button>
+          <button class="danger" data-reset="Luppoli">Luppoli</button>
+          <button class="danger" data-reset="Lieviti">Lieviti</button>
+          <button class="danger" data-reset="Additivi">Additivi</button>
+        </div>
+        <button class="danger full" id="resetAll">☢ Reset completo</button>
+      </div>
+    </section>
+  </main>
+
+  <nav class="bottom-nav" aria-label="Navigazione">
+    <button class="nav-btn active" data-view="dashboard"><span>⌂</span><b>Dashboard</b></button>
+    <button class="nav-btn" data-view="recipes"><span>🍺</span><b>Ricette</b></button>
+  </nav>
+</div>
+
+<div id="modal" class="modal hidden"><div class="modal-box"><button id="modalClose" class="modal-close">×</button><div id="modalContent"></div></div></div>
+<div id="toast" class="toast"></div>
+<script src="app.js"></script>
+</body>
+</html>
